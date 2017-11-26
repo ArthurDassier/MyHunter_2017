@@ -7,6 +7,9 @@
 
 #include <SFML/Graphics.h>
 #include <SFML/Audio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 struct Framebuffer
 {
@@ -14,6 +17,28 @@ struct Framebuffer
 	unsigned int height;
 	sfUint8 *pixels;
 };
+
+void close_window(sfRenderWindow *window)
+{
+	sfRenderWindow_close(window);
+}
+
+int rand_a_b(int a, int b)
+{
+	return (rand() % (b - a) + a);
+}
+
+int analyse_events(sfEvent event, sfRenderWindow *window, sfVector2f position, sfMouseButtonEvent mouse)
+{
+	while (sfRenderWindow_pollEvent(window, &event)) {
+		if (event.type == sfEvtClosed)
+			close_window(window);
+		if (event.type == sfEvtMouseButtonReleased)
+			return(1);
+		else
+			return(0);
+	}
+}
 
 sfIntRect oiseau(int a, int b, int c, int d)
 {
@@ -43,15 +68,18 @@ int main ()
 	sfRenderWindow	*window;
 	sfTexture	*texture;
 	sfTexture	*texture2;
+	sfEvent	event;
+	sfMouseButtonEvent	mouse;
 	sfSprite	*sprite;
 	sfTime		time_s;
 	sfSprite	*sprite2;
-	sfVideoMode video_mode;
+	sfVideoMode	video_mode;
 	sfSoundBuffer	*soundbuffer;
+	sfVector2f	position;
 	sfSound	*sound;
 	sfIntRect tableau_taille[9];
 	my_init(tableau_taille);
-	texture = sfTexture_createFromFile("../../../../Downloads/bfg.png",
+	texture = sfTexture_createFromFile("../../../../Pictures/backg.png",
 						NULL);
 
 	sprite = sfSprite_create();
@@ -63,9 +91,12 @@ int main ()
 	sfSound_setBuffer(sound, soundbuffer);
 	sfSound_play(sound);
 
-	video_mode.width = 1200;
-	video_mode.height = 800;
+	video_mode.width = 1920;
+	video_mode.height = 1080;
 	video_mode.bitsPerPixel = 8;
+
+	position.x = 0;
+	position.y = 0;
 
 
 
@@ -78,13 +109,27 @@ int main ()
 		texture2 = sfTexture_createFromFile("../../../../Pictures/OUASO.png",
 							&tableau_taille[i]);
 		i++;
+		analyse_events(event, window, position, mouse);
 		sfSprite_setTexture(sprite, texture, sfTrue);
 		sfSprite_setTexture(sprite2, texture2, sfTrue);
 
 		sfRenderWindow_drawSprite(window, sprite, NULL);
 		sfRenderWindow_drawSprite(window, sprite2, NULL);
+		sfSprite_setPosition(sprite2, position);
+		if (analyse_events(event, window, position, mouse) == 1) {
+			position.x = 0;
+			position.y = rand()%700;
+		}
+		position.x = position.x + 12;
+		if (position.x >= 1900) {
+			position.x = 0;
+			position.y = rand()%800;
+		}
 		sfRenderWindow_display(window);
 		sfSleep(time_s);
 	}
+	sfRenderWindow_destroy(window);
+	sfSprite_destroy(sprite);
+	sfSprite_destroy(sprite2);
 	return (0);
 }

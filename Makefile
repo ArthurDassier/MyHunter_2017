@@ -16,7 +16,7 @@ MY.H_DIR	=	./include
 
 CC	=	gcc
 
-LIB_FLAG	=	-l c_graph_prog
+LIB_FLAG	=	-lcsfml-audio -lcsfml-window -lcsfml-graphics -lcsfml-system
 
 INCL_FLAG	=	-I$(MY.H_DIR)
 
