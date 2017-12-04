@@ -5,11 +5,15 @@
 ## Makefile
 ##
 
-SRC	=	srcs/BootstrapOpenWindow.c		\
+SRC	=	srcs/brain.c		\
+		srcs/basics.c		\
+		srcs/oaso.c		\
+		srcs/fcts_while.c	\
 
 OBJ	=	$(SRC:.c = .o)
 
 NAME	=	my_hunter
+
 LIB_DIR	=	./lib
 
 MY.H_DIR	=	./include
@@ -23,7 +27,7 @@ INCL_FLAG	=	-I$(MY.H_DIR)
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-		$(CC) -o $(NAME) $(OBJ) $(LIB_FLAG)
+		$(CC) -o $(NAME) $(OBJ) $(LIB_FLAG) $(INCL_FLAG)
 
 clean:
 	rm -f *.o
