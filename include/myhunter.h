@@ -42,6 +42,9 @@ void my_init(struct graphs *graph);
 struct graphs *init_graph(struct graphs *graph);
 sfIntRect oiseau(int a, int b, int c, int d);
 struct game_s *init_game(struct game_s *game);
-int call(struct game_s *game, struct graphs *graph);
+void textrs(struct game_s *game, struct graphs *graph);
+void movemts(struct graphs *graph);
+void init_window(struct game_s *game, struct graphs *graph);
+void anim(struct graphs *graph);
 
 #endif

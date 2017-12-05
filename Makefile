@@ -9,6 +9,7 @@ SRC	=	srcs/brain.c		\
 		srcs/basics.c		\
 		srcs/oaso.c		\
 		srcs/fcts_while.c	\
+		srcs/init_wind.c	\
 
 OBJ	=	$(SRC:.c = .o)
 
