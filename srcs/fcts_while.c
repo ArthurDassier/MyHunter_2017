@@ -9,7 +9,7 @@
 
 void textrs(struct game_s *game, struct graphs *graph)
 {
-	close_ev(game->event, game->window);
+	analys_ev(game->event, game->window, graph);
 	sfSprite_setTexture(graph->sprite, graph->texture, sfTrue);
 	sfSprite_setTexture(graph->sprite2, graph->texture2, sfTrue);
 	sfRenderWindow_drawSprite(game->window, graph->sprite, NULL);
@@ -19,7 +19,7 @@ void textrs(struct game_s *game, struct graphs *graph)
 
 void movemts(struct graphs *graph)
 {
-	graph->position.x = graph->position.x + 8;
+	graph->position.x = graph->position.x + graph->v;
 	if (graph->position.x >= 1900) {
 		graph->position.x = 0;
 		graph->position.y = rand()%790;
@@ -28,8 +28,8 @@ void movemts(struct graphs *graph)
 
 void anim(struct graphs *graph)
 {
-	if (graph->i == 10)
-		graph->i = 0;
+	if (graph->i == 11)
+	graph->i = 0;
 	graph->texture2 = sfTexture_createFromFile("./textures/OUASO.png",
 						&graph->animation[graph->i]);
 	graph->i++;

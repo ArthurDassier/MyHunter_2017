@@ -17,9 +17,11 @@ int rand_a_b(int a, int b)
 	return (rand() % (b - a) + a);
 }
 
-int close_ev(sfEvent event, sfRenderWindow *window)
+int analys_ev(sfEvent event, sfRenderWindow *window, struct graphs *graph)
 {
 	while (sfRenderWindow_pollEvent(window, &event)) {
+		if (event.type == sfEvtMouseButtonPressed)
+			kill(window, graph);
 		if (event.type == sfEvtClosed)
 			close_window(window);
 	}
@@ -47,5 +49,6 @@ struct graphs *init_graph(struct graphs *graph)
 	graph->position;
 	my_init(graph);
 	graph->i = 0;
+	graph->v = 4;
 	return(graph);
 }

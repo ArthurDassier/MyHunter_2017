@@ -16,8 +16,8 @@ int main ()
 	init_graph(&graph);
 	init_window(&game, &graph);
 	while (sfRenderWindow_isOpen(game.window)) {
-		anim(&graph);
 		textrs(&game, &graph);
+		anim(&graph);
 		movemts(&graph);
 		sfRenderWindow_display(game.window);
 		sfSleep(game.time_s);
