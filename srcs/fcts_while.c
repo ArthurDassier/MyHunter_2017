@@ -7,12 +7,12 @@
 
 #include "myhunter.h"
 
-int call(struct game_s *game)
+int call(struct game_s *game, struct graphs *graph)
 {
 	close_ev(game->event, game->window);
-	sfSprite_setTexture(game->sprite, game->texture, sfTrue);
-	sfSprite_setTexture(game->sprite2, game->texture2, sfTrue);
-	sfRenderWindow_drawSprite(game->window, game->sprite, NULL);
-	sfRenderWindow_drawSprite(game->window, game->sprite2, NULL);
-	sfSprite_setPosition(game->sprite2, game->position);
+	sfSprite_setTexture(graph->sprite, graph->texture, sfTrue);
+	sfSprite_setTexture(graph->sprite2, graph->texture2, sfTrue);
+	sfRenderWindow_drawSprite(game->window, graph->sprite, NULL);
+	sfRenderWindow_drawSprite(game->window, graph->sprite2, NULL);
+	sfSprite_setPosition(graph->sprite2, graph->position);
 }

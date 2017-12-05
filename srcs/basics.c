@@ -27,21 +27,25 @@ int close_ev(sfEvent event, sfRenderWindow *window)
 
 struct game_s *init_game(struct game_s *game)
 {
-	game->texture = sfTexture_createFromFile("../../../../Pictures/backg.png",
-	NULL);
+
 	game->video_mode;
 	game->window;
-	game->texture2;
 	game->event;
-	game->sprite = sfSprite_create();
-	game->sprite2 = sfSprite_create();
 	game->time_s;
-	game->soundbuffer = sfSoundBuffer_createFromFile("../../../../Downloads/Castlevania-_Vampire_Killer.wav");
-	game->position;
+	game->soundbuffer = sfSoundBuffer_createFromFile("./sounds/Castlevania-_Vampire_Killer.wav");
 	game->sound = sfSound_create();
-	my_init(game);
-	game->i = 0;
-	game->j = 0;
-	game->u = 0;
 	return(game);
+}
+
+struct graphs *init_graph(struct graphs *graph)
+{
+	graph->texture = sfTexture_createFromFile("./textures/backg.png",
+	NULL);
+	graph->texture2;
+	graph->sprite = sfSprite_create();
+	graph->sprite2 = sfSprite_create();
+	graph->position;
+	my_init(graph);
+	graph->i = 0;
+	return(graph);
 }

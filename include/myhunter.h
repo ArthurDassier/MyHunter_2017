@@ -16,29 +16,32 @@
 
 struct game_s
 {
-	sfTexture	*texture;
 	sfVideoMode	video_mode;
 	sfRenderWindow	*window;
-	sfTexture	*texture2;
 	sfEvent		event;
-	sfSprite	*sprite;
-	sfSprite	*sprite2;
 	sfTime		time_s;
 	sfSoundBuffer	*soundbuffer;
-	sfVector2f	position;
 	sfSound		*sound;
+};
+
+struct graphs
+{
+	sfTexture	*texture;
+	sfTexture	*texture2;
+	sfSprite	*sprite;
+	sfSprite	*sprite2;
+	sfVector2f	position;
 	sfIntRect	tableau_taille[10];
 	int		i;
-	int		j;
-	int		u;
 };
 
 void close_window(sfRenderWindow *window);
 int rand_a_b(int a, int b);
 int close_ev(sfEvent event, sfRenderWindow *window);
-void my_init(struct game_s *game);
+void my_init(struct graphs *graph);
+struct graphs *init_graph(struct graphs *graph);
 sfIntRect oiseau(int a, int b, int c, int d);
 struct game_s *init_game(struct game_s *game);
-int call(struct game_s *game);
+int call(struct game_s *game, struct graphs *graph);
 
 #endif
