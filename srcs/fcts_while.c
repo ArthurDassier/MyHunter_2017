@@ -31,6 +31,6 @@ void anim(struct graphs *graph)
 	if (graph->i == 10)
 		graph->i = 0;
 	graph->texture2 = sfTexture_createFromFile("./textures/OUASO.png",
-						&graph->tableau_taille[graph->i]);
+						&graph->animation[graph->i]);
 	graph->i++;
 }

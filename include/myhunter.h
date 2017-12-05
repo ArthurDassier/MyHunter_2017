@@ -31,7 +31,7 @@ struct graphs
 	sfSprite	*sprite;
 	sfSprite	*sprite2;
 	sfVector2f	position;
-	sfIntRect	tableau_taille[10];
+	sfIntRect	animation[10];
 	int		i;
 };
 
