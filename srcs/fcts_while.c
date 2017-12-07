@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2017
 ** fcts_while.c
 ** File description:
-** lesplsss
+** fcts_boucle
 */
 
 #include "myhunter.h"
 
-int textrs(struct game_s *game, struct graphs *graph)
+int textrs(game_s *game, graphs *graph)
 {
 	sfSprite_setTexture(graph->sprite2, graph->texture2, sfTrue);
 	sfRenderWindow_drawSprite(game->window, graph->sprite, NULL);
@@ -16,7 +16,7 @@ int textrs(struct game_s *game, struct graphs *graph)
 	return(analys_ev(game->event, game->window, graph));
 }
 
-int movemts(struct graphs *graph)
+int movemts(graphs *graph)
 {
 	graph->position.x = graph->position.x + graph->v;
 	if (graph->position.x >= 1900)
@@ -24,7 +24,7 @@ int movemts(struct graphs *graph)
 	return(0);
 }
 
-void anim(struct graphs *graph)
+void anim(graphs *graph)
 {
 	if (graph->i == 11)
 	graph->i = 0;

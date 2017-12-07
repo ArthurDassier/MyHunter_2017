@@ -17,7 +17,7 @@ sfIntRect oiseau(int a, int b, int c, int d)
 	return(taille);
 }
 
-void my_init(struct graphs *graph)
+void my_init(graphs *graph)
 {
 	graph->animation[0] = oiseau(83, 0, 87, 75);
 	graph->animation[1] = oiseau(85, 456, 0, 75);
@@ -32,7 +32,7 @@ void my_init(struct graphs *graph)
 	graph->animation[10] = oiseau(85, 380, 0, 75);
 }
 
-int kill(sfRenderWindow *window, struct graphs *graph)
+int kill(sfRenderWindow *window, graphs *graph)
 {
 	if (sfMouse_getPositionRenderWindow(window).x >= graph->position.x &&
 	sfMouse_getPositionRenderWindow(window).x <= graph->position.x + 75) {

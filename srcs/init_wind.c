@@ -2,19 +2,19 @@
 ** EPITECH PROJECT, 2017
 ** init_wind.c
 ** File description:
-** lafenetreee
+** lafenetre
 */
 
 #include "myhunter.h"
 
-void init_window(struct game_s *game, struct graphs *graph)
+void init_window(game_s *game, graphs *graph)
 {
 	game->time_s.microseconds = FRAMERATE;
 	sfSound_setBuffer(game->sound, game->soundbuffer);
 	sfSound_play(game->sound);
-	game->video_mode.width = 1920;
-	game->video_mode.height = 1080;
-	game->video_mode.bitsPerPixel = 8;
+	game->video_mode.width = WIDTH_WID;
+	game->video_mode.height = HEIGHT_WID;
+	game->video_mode.bitsPerPixel = BPP;
 	graph->position.x = -100;
 	graph->position.y = 150;
 	game->window = sfRenderWindow_create(game->video_mode, "MyWindow", sfDefaultStyle,

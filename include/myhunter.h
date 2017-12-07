@@ -10,15 +10,14 @@
 
 #include "my.h"
 #include "printf.h"
+#include "config.h"
 #include <SFML/Graphics.h>
 #include <SFML/Audio.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-#define FRAMERATE 20000
-
-struct game_s
+typedef struct game_s
 {
 	sfVideoMode	video_mode;
 	sfRenderWindow	*window;
@@ -27,9 +26,9 @@ struct game_s
 	sfSoundBuffer	*soundbuffer;
 	sfSound		*sound;
 	sfMouseButton	*mouse;
-};
+} game_s;
 
-struct graphs
+typedef struct graphs
 {
 	sfTexture	*texture;
 	sfTexture	*texture2;
@@ -39,20 +38,20 @@ struct graphs
 	sfIntRect	animation[11];
 	int		i;
 	int		v;
-};
+} graphs;
 
-int analys_ev(sfEvent event, sfRenderWindow *window, struct graphs *graph);
-void my_init(struct graphs *graph);
-struct graphs *init_graph(struct graphs *graph);
+int analys_ev(sfEvent event, sfRenderWindow *window, graphs *graph);
+void my_init(graphs *graph);
+graphs *init_graph(graphs *graph);
 sfIntRect oiseau(int a, int b, int c, int d);
-struct game_s *init_game(struct game_s *game);
-int textrs(struct game_s *game, struct graphs *graph);
-int movemts(struct graphs *graph);
-void init_window(struct game_s *game, struct graphs *graph);
-void anim(struct graphs *graph);
+game_s *init_game(game_s *game);
+int textrs(game_s *game, graphs *graph);
+int movemts(graphs *graph);
+void init_window(game_s *game, graphs *graph);
+void anim(graphs *graph);
 int handle_evt(sfEvent *event);
-int kill(sfRenderWindow *window, struct graphs *graph);
-void destroyer(struct game_s *game, struct graphs *graph);
-void game_init(struct game_s *game, struct graphs *graph);
+int kill(sfRenderWindow *window, graphs *graph);
+void destroyer(game_s *game, graphs *graph);
+void game_init(game_s *game, graphs *graph);
 
 #endif

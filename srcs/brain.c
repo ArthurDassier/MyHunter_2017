@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2017
 ** brain.c
 ** File description:
-** blarg
+** centre_nevralgique
 */
 
 #include "myhunter.h"
 
-void game_init(struct game_s *game, struct graphs *graph)
+void game_init(game_s *game, graphs *graph)
 {
 	init_game(game);
 	init_graph(graph);
@@ -17,9 +17,9 @@ void game_init(struct game_s *game, struct graphs *graph)
 
 int main ()
 {
-	struct game_s	game;
-	struct graphs	*graph = malloc(sizeof(struct graphs));
-	int		score = 0;
+	game_s	game;
+	graphs	*graph = malloc(sizeof(graphs));
+	int	score = 0;
 
 	game_init(&game, graph);
 	while (sfRenderWindow_isOpen(game.window)) {
@@ -32,7 +32,6 @@ int main ()
 		sfRenderWindow_display(game.window);
 		sfSleep(game.time_s);
 	}
-
 	destroyer(&game, graph);
 	return (0);
 }

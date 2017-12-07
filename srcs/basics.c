@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2017
 ** basics.c
 ** File description:
-** jadorelessushis
+** fcts_basiques
 */
 
 #include "myhunter.h"
 
-int analys_ev(sfEvent event, sfRenderWindow *window, struct graphs *graph)
+int analys_ev(sfEvent event, sfRenderWindow *window, graphs *graph)
 {
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtMouseButtonPressed)
@@ -20,14 +20,14 @@ int analys_ev(sfEvent event, sfRenderWindow *window, struct graphs *graph)
 	return(0);
 }
 
-struct game_s *init_game(struct game_s *game)
+game_s *init_game(game_s *game)
 {
 	game->soundbuffer = sfSoundBuffer_createFromFile("./sounds/castel.wav");
 	game->sound = sfSound_create();
 	return(game);
 }
 
-struct graphs *init_graph(struct graphs *graph)
+graphs *init_graph(graphs *graph)
 {
 	graph->texture = sfTexture_createFromFile("./textures/backg.png",
 	NULL);
@@ -39,11 +39,14 @@ struct graphs *init_graph(struct graphs *graph)
 	return(graph);
 }
 
-void destroyer(struct game_s *game, struct graphs *graph)
+void destroyer(game_s *game, graphs *graph)
 {
 	sfSprite_destroy(graph->sprite);
 	sfSprite_destroy(graph->sprite2);
 	sfTexture_destroy(graph->texture);
 	sfTexture_destroy(graph->texture2);
+	sfSoundBuffer_destroy(game->soundbuffer);
+	sfSound_destroy(game->sound);
 	sfRenderWindow_destroy(game->window);
+	free(graph);
 }
