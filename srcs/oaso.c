@@ -32,15 +32,17 @@ void my_init(struct graphs *graph)
 	graph->animation[10] = oiseau(85, 380, 0, 75);
 }
 
-void kill(sfRenderWindow *window, struct graphs *graph)
+int kill(sfRenderWindow *window, struct graphs *graph)
 {
 	if (sfMouse_getPositionRenderWindow(window).x >= graph->position.x &&
 	sfMouse_getPositionRenderWindow(window).x <= graph->position.x + 75) {
 		if (sfMouse_getPositionRenderWindow(window).y >= graph->position.y &&
 		sfMouse_getPositionRenderWindow(window).y <= graph->position.y + 85) {
-			graph->position.x = 0;
+			graph->position.x = -100;
 			graph->position.y = rand()%790;
 			graph->v = graph->v + 2;
+			return(1);
 		}
 	}
+	return(0);
 }

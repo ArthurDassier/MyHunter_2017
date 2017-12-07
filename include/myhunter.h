@@ -1,18 +1,22 @@
 /*
 ** EPITECH PROJECT, 2017
-** <...>
+** my_hunter.h
 ** File description:
-** <...>
+** protots
 */
 
 #ifndef MY_HUNTER_H
 #define MY_HUNTER_H
 
+#include "my.h"
+#include "printf.h"
 #include <SFML/Graphics.h>
 #include <SFML/Audio.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
+#define FRAMERATE 20000
 
 struct game_s
 {
@@ -37,18 +41,18 @@ struct graphs
 	int		v;
 };
 
-void close_window(sfRenderWindow *window);
-int rand_a_b(int a, int b);
 int analys_ev(sfEvent event, sfRenderWindow *window, struct graphs *graph);
 void my_init(struct graphs *graph);
 struct graphs *init_graph(struct graphs *graph);
 sfIntRect oiseau(int a, int b, int c, int d);
 struct game_s *init_game(struct game_s *game);
-void textrs(struct game_s *game, struct graphs *graph);
-void movemts(struct graphs *graph);
+int textrs(struct game_s *game, struct graphs *graph);
+int movemts(struct graphs *graph);
 void init_window(struct game_s *game, struct graphs *graph);
 void anim(struct graphs *graph);
 int handle_evt(sfEvent *event);
-void kill(sfRenderWindow *window, struct graphs *graph);
+int kill(sfRenderWindow *window, struct graphs *graph);
+void destroyer(struct game_s *game, struct graphs *graph);
+void game_init(struct game_s *game, struct graphs *graph);
 
 #endif

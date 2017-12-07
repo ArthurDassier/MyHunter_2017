@@ -19,16 +19,19 @@ LIB_DIR	=	./lib
 
 MY.H_DIR	=	./include
 
-CC	=	gcc
+CC	=	gcc -g3
 
-LIB_FLAG	=	-lcsfml-audio -lcsfml-window -lcsfml-graphics -lcsfml-system
+C_FLAGS	=	-Wall -Wextra
+
+LIB_FLAG	=	-lcsfml-audio -lcsfml-window -lcsfml-graphics -lcsfml-system -lmy
 
 INCL_FLAG	=	-I$(MY.H_DIR)
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-		$(CC) -o $(NAME) $(OBJ) $(LIB_FLAG) $(INCL_FLAG)
+		$(MAKE) -C lib/my
+		$(CC) -o $(NAME) $(OBJ) $(C_FLAG) -L./lib $(LIB_FLAG) $(INCL_FLAG)
 
 clean:
 	rm -f *.o

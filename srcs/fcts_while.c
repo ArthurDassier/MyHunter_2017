@@ -7,23 +7,21 @@
 
 #include "myhunter.h"
 
-void textrs(struct game_s *game, struct graphs *graph)
+int textrs(struct game_s *game, struct graphs *graph)
 {
-	analys_ev(game->event, game->window, graph);
-	sfSprite_setTexture(graph->sprite, graph->texture, sfTrue);
 	sfSprite_setTexture(graph->sprite2, graph->texture2, sfTrue);
 	sfRenderWindow_drawSprite(game->window, graph->sprite, NULL);
 	sfRenderWindow_drawSprite(game->window, graph->sprite2, NULL);
 	sfSprite_setPosition(graph->sprite2, graph->position);
+	return(analys_ev(game->event, game->window, graph));
 }
 
-void movemts(struct graphs *graph)
+int movemts(struct graphs *graph)
 {
 	graph->position.x = graph->position.x + graph->v;
-	if (graph->position.x >= 1900) {
-		graph->position.x = 0;
-		graph->position.y = rand()%790;
-	}
+	if (graph->position.x >= 1900)
+		return (300);
+	return(0);
 }
 
 void anim(struct graphs *graph)
