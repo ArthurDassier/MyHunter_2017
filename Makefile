@@ -23,7 +23,7 @@ CC	=	gcc -g3
 
 C_FLAGS	=	-Wall -Wextra
 
-LIB_FLAG	=	-lcsfml-audio -lcsfml-window -lcsfml-graphics -lcsfml-system -lmy
+LIB_FLAG	=	-l c_graph_prog -lmy
 
 INCL_FLAG	=	-I$(MY.H_DIR)
 
