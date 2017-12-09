@@ -9,18 +9,22 @@
 
 int textrs(game_s *game, graphs *graph)
 {
-	sfSprite_setTexture(graph->sprite2, graph->texture2, sfTrue);
+	sfSprite_setTexture(graph->bird, graph->text_bird, sfTrue);
 	sfRenderWindow_drawSprite(game->window, graph->sprite, NULL);
-	sfRenderWindow_drawSprite(game->window, graph->sprite2, NULL);
-	sfSprite_setPosition(graph->sprite2, graph->position);
+	sfRenderWindow_drawSprite(game->window, graph->bird, NULL);
+	sfRenderWindow_drawSprite(game->window, graph->crosshair, NULL);
+	sfSprite_setPosition(graph->bird, graph->pstn);
+	sfSprite_setPosition(graph->crosshair, graph->hair);
 	return(analys_ev(game->event, game->window, graph));
 }
 
-int movemts(graphs *graph)
+int movemts(game_s *game, graphs *graph)
 {
-	graph->position.x = graph->position.x + graph->v;
-	if (graph->position.x >= 1900)
+	graph->pstn.x = graph->pstn.x + graph->v;
+	if (graph->pstn.x >= 1900)
 		return (300);
+	graph->hair.x = sfMouse_getPositionRenderWindow(game->window).x - 50;
+	graph->hair.y = sfMouse_getPositionRenderWindow(game->window).y - 50;
 	return(0);
 }
 
@@ -28,7 +32,7 @@ void anim(graphs *graph)
 {
 	if (graph->i == 11)
 	graph->i = 0;
-	graph->texture2 = sfTexture_createFromFile("./textures/OUASO.png",
+	graph->text_bird = sfTexture_createFromFile("./textures/OUASO.png",
 						&graph->animation[graph->i]);
 	graph->i++;
 }

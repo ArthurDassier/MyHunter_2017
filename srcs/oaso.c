@@ -34,12 +34,12 @@ void my_init(graphs *graph)
 
 int kill(sfRenderWindow *window, graphs *graph)
 {
-	if (sfMouse_getPositionRenderWindow(window).x >= graph->position.x &&
-	sfMouse_getPositionRenderWindow(window).x <= graph->position.x + 75) {
-		if (sfMouse_getPositionRenderWindow(window).y >= graph->position.y &&
-		sfMouse_getPositionRenderWindow(window).y <= graph->position.y + 85) {
-			graph->position.x = -100;
-			graph->position.y = rand()%790;
+	if (sfMouse_getPositionRenderWindow(window).x >= graph->pstn.x &&
+	sfMouse_getPositionRenderWindow(window).x <= graph->pstn.x + 75) {
+		if (sfMouse_getPositionRenderWindow(window).y >= graph->pstn.y
+		&& sfMouse_getPositionRenderWindow(window).y <= graph->pstn.y + 85) {
+			graph->pstn.x = -100;
+			graph->pstn.y = rand()%790;
 			graph->v = graph->v + 2;
 			return(1);
 		}

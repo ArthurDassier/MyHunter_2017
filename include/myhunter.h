@@ -30,11 +30,14 @@ typedef struct game_s
 
 typedef struct graphs
 {
-	sfTexture	*texture;
-	sfTexture	*texture2;
+	sfTexture	*text_back;
+	sfTexture	*text_bird;
+	sfTexture	*text_crsh;
 	sfSprite	*sprite;
-	sfSprite	*sprite2;
-	sfVector2f	position;
+	sfSprite	*bird;
+	sfSprite	*crosshair;
+	sfVector2f	pstn;
+	sfVector2f	hair;
 	sfIntRect	animation[11];
 	int		i;
 	int		v;
@@ -46,7 +49,7 @@ graphs *init_graph(graphs *graph);
 sfIntRect oiseau(int a, int b, int c, int d);
 game_s *init_game(game_s *game);
 int textrs(game_s *game, graphs *graph);
-int movemts(graphs *graph);
+int movemts(game_s *game, graphs *graph);
 void init_window(game_s *game, graphs *graph);
 void anim(graphs *graph);
 int handle_evt(sfEvent *event);

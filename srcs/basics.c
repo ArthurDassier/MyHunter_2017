@@ -29,10 +29,13 @@ game_s *init_game(game_s *game)
 
 graphs *init_graph(graphs *graph)
 {
-	graph->texture = sfTexture_createFromFile("./textures/backg.png",
+	graph->text_back = sfTexture_createFromFile("./textures/backg.png",
+	NULL);
+	graph->text_crsh = sfTexture_createFromFile("./textures/crossahir1.png",
 	NULL);
 	graph->sprite = sfSprite_create();
-	graph->sprite2 = sfSprite_create();
+	graph->bird = sfSprite_create();
+	graph->crosshair = sfSprite_create();
 	my_init(graph);
 	graph->i = 0;
 	graph->v = 4;
@@ -42,9 +45,9 @@ graphs *init_graph(graphs *graph)
 void destroyer(game_s *game, graphs *graph)
 {
 	sfSprite_destroy(graph->sprite);
-	sfSprite_destroy(graph->sprite2);
-	sfTexture_destroy(graph->texture);
-	sfTexture_destroy(graph->texture2);
+	sfSprite_destroy(graph->bird);
+	sfTexture_destroy(graph->text_back);
+	sfTexture_destroy(graph->text_bird);
 	sfSoundBuffer_destroy(game->soundbuffer);
 	sfSound_destroy(game->sound);
 	sfRenderWindow_destroy(game->window);
