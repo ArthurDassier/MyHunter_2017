@@ -44,10 +44,12 @@ graphs *init_graph(graphs *graph)
 
 void destroyer(game_s *game, graphs *graph)
 {
+	sfSprite_destroy(graph->crosshair);
 	sfSprite_destroy(graph->sprite);
 	sfSprite_destroy(graph->bird);
-	sfTexture_destroy(graph->text_back);
+	sfTexture_destroy(graph->text_crsh);
 	sfTexture_destroy(graph->text_bird);
+	sfTexture_destroy(graph->text_back);
 	sfSoundBuffer_destroy(game->soundbuffer);
 	sfSound_destroy(game->sound);
 	sfRenderWindow_destroy(game->window);
