@@ -56,5 +56,7 @@ int handle_evt(sfEvent *event);
 int kill(sfRenderWindow *window, graphs *graph);
 void destroyer(game_s *game, graphs *graph);
 void game_init(game_s *game, graphs *graph);
+void play(game_s game, graphs *graph);
+void help();
 
 #endif

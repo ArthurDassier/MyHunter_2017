@@ -16,10 +16,8 @@ void game_init(game_s *game, graphs *graph)
 	sfSprite_setTexture(graph->crosshair, graph->text_crsh, sfTrue);
 }
 
-int main ()
+void play(game_s game, graphs *graph)
 {
-	game_s	game;
-	graphs	*graph = malloc(sizeof(graphs));
 	int	score = 0;
 
 	game_init(&game, graph);
@@ -34,5 +32,27 @@ int main ()
 		sfSleep(game.time_s);
 	}
 	destroyer(&game, graph);
+}
+
+void help()
+{
+	my_printf("Help :\nMouse click on the birds to earn points !\n");
+	my_printf("The game exit when a bird reach the right side of the ");
+	my_printf("screen,\nthen you'll see your score on the shell.\n");
+	my_printf("Have fun playing My Hunter ! :)\n");
+
+}
+
+int main (int argc, char *argv[])
+{
+	game_s	game;
+	graphs	*graph = malloc(sizeof(graphs));
+
+	if (argc == 2 && argv[1][0] == '-' && argv[1][1] == 'h') {
+		help();
+		return(0);
+	}
+	else
+		play(game, graph);
 	return (0);
 }

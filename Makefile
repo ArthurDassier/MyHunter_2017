@@ -23,7 +23,7 @@ CC	=	gcc -g3
 
 C_FLAGS	=	-Wall -Wextra
 
-LIB_FLAG	=	-l c_graph_prog
+LIB_FLAG	=	-l c_graph_prog -l my
 
 INCL_FLAG	=	-I$(MY.H_DIR)
 
