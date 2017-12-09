@@ -17,7 +17,7 @@ void init_window(game_s *game, graphs *graph)
 	game->video_mode.bitsPerPixel = BPP;
 	graph->pstn.x = -100;
 	graph->pstn.y = 150;
-	game->window = sfRenderWindow_create(game->video_mode, "MyWindow", sfDefaultStyle,
-					NULL);
+	game->window = sfRenderWindow_create(game->video_mode, "MyWindow",
+	sfDefaultStyle, NULL);
 	sfRenderWindow_setMouseCursorVisible(game->window, sfFalse);
 }

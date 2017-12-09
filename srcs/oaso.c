@@ -37,7 +37,8 @@ int kill(sfRenderWindow *window, graphs *graph)
 	if (sfMouse_getPositionRenderWindow(window).x >= graph->pstn.x &&
 	sfMouse_getPositionRenderWindow(window).x <= graph->pstn.x + 75) {
 		if (sfMouse_getPositionRenderWindow(window).y >= graph->pstn.y
-		&& sfMouse_getPositionRenderWindow(window).y <= graph->pstn.y + 85) {
+		&& sfMouse_getPositionRenderWindow(window).y <= graph->pstn.y
+		+ 85) {
 			graph->pstn.x = -100;
 			graph->pstn.y = rand()%790;
 			graph->v = graph->v + 2;
