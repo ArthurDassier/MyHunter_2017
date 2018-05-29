@@ -2,43 +2,45 @@
 ## EPITECH PROJECT, 2017
 ## Makefile
 ## File description:
-## Makefile
+## a_makefile_for_projetcs
 ##
 
-SRC	=	srcs/brain.c		\
-		srcs/basics.c		\
-		srcs/oaso.c		\
-		srcs/fcts_while.c	\
-		srcs/init_wind.c	\
+CC	=	gcc
 
-OBJ	=	$(SRC:.c = .o)
+RM	=	rm -rf
+
+CFLAGS	+=	-Wall -Wextra
+
+CPPFLAGS	+=	-I./include
 
 NAME	=	my_hunter
 
-LIB_DIR	=	./lib
+SRCS	=	srcs/main.c
 
-MY.H_DIR	=	./include
 
-CC	=	gcc -g3
+OBJS	=	$(SRCS:.c=.o)
 
-C_FLAGS	=	-Wall -Wextra
+ifeq ($(shell cat /etc/*-release | grep "Fedora"), )
+LIB	=	-L./lib -lmy -lcsfml-audio -lcsfml-window -lcsfml-system -lcsfml-graphics
+else
+LIB	=	-L./lib -lmy -lc_graph_prog
+endif
 
-LIB_FLAG	=	-l c_graph_prog -lmy
+all: $(NAME)
 
-INCL_FLAG	=	-I$(MY.H_DIR)
-
-all:	$(NAME)
-
-$(NAME):	$(OBJ)
-		$(MAKE) -C lib/my
-		$(CC) -o $(NAME) $(OBJ) $(C_FLAG) -L./lib $(LIB_FLAG) $(INCL_FLAG)
+$(NAME): $(OBJS)
+	make -C ./lib/my
+	$(CC) $(OBJS) -o $(NAME) $(LIB)
 
 clean:
-	rm -f *.o
+	$(RM) $(OBJS)
+	make -C ./lib/my clean
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
+	$(RM) lib/*.a
+	make -C ./lib/my fclean
 
 re: fclean all
 
-.PHONY: fclean all re clean
+.PHONY: all clean fclean re
