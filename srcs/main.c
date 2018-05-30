@@ -24,14 +24,16 @@ int get_bird(sfRenderWindow *window, t_sprite *birds)
 	return (1);
 }
 
-void	analyse_event(sfRenderWindow *window, t_sprite **birds)
+void	analyse_event(sfRenderWindow *window, t_sprite **birds, t_sounds *sounds)
 {
 	sfEvent	event;
 
 	while (sfRenderWindow_pollEvent(window, &event)) {
-		if (event.type == sfEvtMouseButtonPressed)
+		if (event.type == sfEvtMouseButtonPressed) {
+			sfSound_play(sounds->sound);
 			for (int nb = 0; birds[nb] != NULL &&
 				get_bird(window, birds[nb]) == 1; ++nb);
+		}
 		if (event.type == sfEvtClosed) {
 			my_printf("pfff, looser.\n");
 			sfRenderWindow_close(window);

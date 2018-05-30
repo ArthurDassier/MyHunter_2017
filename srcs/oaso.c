@@ -21,7 +21,7 @@ sfIntRect pixel_tall(int a, int b, int c, int d)
 
 sfIntRect *bird_rect(void)
 {
-	sfIntRect	*rect = malloc(sizeof(sfIntRect) * 10);
+	sfIntRect	*rect = malloc(sizeof(sfIntRect) * 11);
 
 	rect[0] = pixel_tall(85, 228, 0, 75);
 	rect[1] = pixel_tall(85, 0, 86, 75);
@@ -33,5 +33,6 @@ sfIntRect *bird_rect(void)
 	rect[7] = pixel_tall(85, 76, 0, 75);
 	rect[8] = pixel_tall(85, 0, 0, 75);
 	rect[9] = pixel_tall(85, 152, 0, 75);
+	rect[10] = pixel_tall(85, 76, 86, 150);
 	return (rect);
 }

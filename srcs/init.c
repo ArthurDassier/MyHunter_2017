@@ -25,7 +25,6 @@ t_sprite	**init_birds(int nb)
 	return (birds);
 }
 
-
 t_sprite *create_sprite(char *path, int x, int y, int rec)
 {
 	t_sprite	*new_sprite = malloc(sizeof(t_sprite));
@@ -38,6 +37,17 @@ t_sprite *create_sprite(char *path, int x, int y, int rec)
 	new_sprite->alive = 1;
 	sfSprite_setTexture(new_sprite->sp, new_sprite->texture, sfTrue);
 	return (new_sprite);
+}
+
+t_sounds *create_sounds(void)
+{
+	t_sounds *new_sounds = malloc(sizeof(t_sounds));
+
+	new_sounds->music1 = sfMusic_createFromFile("./sounds/wow1.ogg");
+	new_sounds->buf = sfSoundBuffer_createFromFile("./sounds/kalash.ogg");
+	new_sounds->sound = sfSound_create();
+	sfSound_setBuffer(new_sounds->sound, new_sounds->buf);
+	return (new_sounds);
 }
 
 sfRenderWindow *init_window(void)
