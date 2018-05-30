@@ -11,19 +11,22 @@ RM	=	rm -rf
 
 CFLAGS	+=	-Wall -Wextra
 
-CPPFLAGS	+=	-I./include
+CFLAGS	+=	-I./include
 
 NAME	=	my_hunter
 
-SRCS	=	srcs/main.c
-
+SRCS	=	srcs/main.c	\
+		srcs/play.c	\
+		srcs/init.c	\
+		srcs/oaso.c	\
+		srcs/utils.c	\
 
 OBJS	=	$(SRCS:.c=.o)
 
 ifeq ($(shell cat /etc/*-release | grep "Fedora"), )
-LIB	=	-L./lib -lmy -lcsfml-audio -lcsfml-window -lcsfml-system -lcsfml-graphics
+LIB	=	-lcsfml-window -lcsfml-graphics -lcsfml-audio -lcsfml-system -lmy -L./lib -lmy
 else
-LIB	=	-L./lib -lmy -lc_graph_prog
+LIB	=	-lc_graph_prog -L./lib -lmy
 endif
 
 all: $(NAME)
@@ -40,6 +43,7 @@ fclean: clean
 	$(RM) $(NAME)
 	$(RM) lib/*.a
 	make -C ./lib/my fclean
+
 
 re: fclean all
 

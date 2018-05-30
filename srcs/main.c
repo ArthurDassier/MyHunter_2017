@@ -1,11 +1,47 @@
 /*
 ** EPITECH PROJECT, 2018
-** main.c
+** brain.c
 ** File description:
-** Arthur
+** blabla
 */
+
+#include <time.h>
+#include "my.h"
+#include "config.h"
+#include "printf.h"
+#include "hunter.h"
+
+int get_bird(sfRenderWindow *window, t_sprite *birds)
+{
+	if (sfMouse_getPositionRenderWindow(window).x >= birds->pos.x &&
+	sfMouse_getPositionRenderWindow(window).x <= birds->pos.x + 75) {
+		if (sfMouse_getPositionRenderWindow(window).y >= birds->pos.y
+		&& sfMouse_getPositionRenderWindow(window).y <= birds->pos.y + 85) {
+			birds->alive = 0;
+			return (0);
+		}
+	}
+	return (1);
+}
+
+void	analyse_event(sfRenderWindow *window, t_sprite **birds)
+{
+	sfEvent	event;
+
+	while (sfRenderWindow_pollEvent(window, &event)) {
+		if (event.type == sfEvtMouseButtonPressed)
+			for (int nb = 0; birds[nb] != NULL &&
+				get_bird(window, birds[nb]) == 1; ++nb);
+		if (event.type == sfEvtClosed) {
+			my_printf("pfff, looser.\n");
+			sfRenderWindow_close(window);
+		}
+	}
+}
 
 int main(void)
 {
-	return 0;
+	srand(time(NULL));
+	play();
+	return (0);
 }

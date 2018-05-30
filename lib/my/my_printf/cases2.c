@@ -22,7 +22,7 @@ int case_p(va_list ap)
 
 	if (nb == 0) {
 		write(1, "(nil)", 5);
-		return(0);
+		return (0);
 	}
 	my_putstr("0x");
 	my_put_nbr_base_long(nb, "0123456789abcdef");
@@ -39,8 +39,9 @@ int case_b(va_list ap)
 
 int case_mod(va_list ap)
 {
+	(void) ap;
 	my_putchar('%');
-	return(0);
+	return (0);
 }
 
 int case_smaj(va_list ap)
@@ -49,7 +50,7 @@ int case_smaj(va_list ap)
 	int	i = 0;
 
 	while (str[i] != '\0') {
-		if (str[i] > 32 && str[i] <= 127)
+		if (str[i] > 32 && str[i] < 127)
 			my_putchar(str[i]);
 		else {
 			my_putchar('\\');
