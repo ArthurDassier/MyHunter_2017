@@ -16,13 +16,10 @@ static void	draw_cross(sfRenderWindow *window, t_sprite **cross)
 	pos.y = sfMouse_getPositionRenderWindow(window).y - 50;
 	sfRenderWindow_drawSprite(window, cross[0]->sp, NULL);
 	sfSprite_setPosition(cross[0]->sp, pos);
-	if (cross[1]->alive != 0) {
-		sfRenderWindow_drawSprite(window, cross[1]->sp, NULL);
+	if (sfTime_asSeconds(sfClock_getElapsedTime(cross[1]->clock)) < 0.05) {
 		sfSprite_setPosition(cross[1]->sp, pos);
-		++cross[1]->alive;
+		sfRenderWindow_drawSprite(window, cross[1]->sp, NULL);
 	}
-	if (cross[1]->alive == 6)
-		cross[1]->alive = 0;
 }
 
 void draw_birds(sfRenderWindow *window, t_sprite **birds, t_sprite **cross)

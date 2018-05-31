@@ -20,8 +20,10 @@ SRCS	=	srcs/main.c		\
 		srcs/init.c		\
 		srcs/oaso.c		\
 		srcs/utils.c		\
-		srcs/draw_birds.c	\
+		srcs/draw.c		\
 		srcs/events.c		\
+		srcs/life.c		\
+		srcs/level.c		\
 
 OBJS	=	$(SRCS:.c=.o)
 

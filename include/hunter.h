@@ -18,14 +18,15 @@ typedef struct s_sprite
 	int		rec;
 	int		forward;
 	int		alive;
-} t_sprite;
+}			t_sprite;
 
 typedef struct s_sounds
 {
 	sfSoundBuffer	*buf;
 	sfSound		*sound;
 	sfMusic		*music1;
-} t_sounds;
+	sfMusic		*music_boss;
+}			t_sounds;
 
 sfRenderWindow	*init_window(void);
 t_sprite	*create_sprite(char *, int, int, int);
@@ -37,5 +38,7 @@ int		play(void);
 t_sounds	*create_sounds(void);
 void		destroyer(t_sprite *, t_sprite **, t_sprite **, t_sounds *);
 void		draw_birds(sfRenderWindow *, t_sprite **, t_sprite **);
+int		draw_life(sfRenderWindow *, t_sprite *, t_sprite **);
+void		level(t_sprite *, int *, t_sprite **, t_sounds *);
 
 #endif

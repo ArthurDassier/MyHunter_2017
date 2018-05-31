@@ -8,6 +8,15 @@
 #include "my.h"
 #include "hunter.h"
 
+static void my_free(t_sprite *back, t_sprite **birds,
+	t_sprite **cross, t_sounds *sounds)
+{
+	free(cross);
+	free(birds);
+	free(sounds);
+	free(back);
+}
+
 void destroyer(t_sprite *back, t_sprite **birds,
 	t_sprite **cross, t_sounds *sounds)
 {
@@ -27,10 +36,8 @@ void destroyer(t_sprite *back, t_sprite **birds,
 	sfSound_destroy(sounds->sound);
 	sfSoundBuffer_destroy(sounds->buf);
 	sfMusic_destroy(sounds->music1);
-	free(cross);
-	free(birds);
-	free(sounds);
-	free(back);
+	sfMusic_destroy(sounds->music_boss);
+	my_free(back, birds, cross, sounds);
 }
 
 void window_display(sfRenderWindow *window)

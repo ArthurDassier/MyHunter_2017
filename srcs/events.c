@@ -26,8 +26,11 @@ static void kill(sfRenderWindow *window, t_sprite **birds)
 {
 	int	nb = 0;
 
-	while (birds[nb] != NULL && get_bird(window, birds[nb]) == 1)
+	while (birds[nb] != NULL) {
+		if (get_bird(window, birds[nb]) == 0)
+			return;
 		++nb;
+	}
 }
 
 void	analyse_event(sfRenderWindow *window, t_sprite **birds,
@@ -38,7 +41,7 @@ void	analyse_event(sfRenderWindow *window, t_sprite **birds,
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtMouseButtonPressed) {
 			sfSound_play(sounds->sound);
-			++cross[1]->alive;
+			sfClock_restart(cross[1]->clock);
 			kill(window, birds);
 		}
 		if (event.type == sfEvtClosed) {

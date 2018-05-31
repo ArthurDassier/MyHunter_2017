@@ -44,6 +44,7 @@ t_sounds *create_sounds(void)
 	t_sounds *new_sounds = malloc(sizeof(t_sounds));
 
 	new_sounds->music1 = sfMusic_createFromFile("./sounds/wow1.ogg");
+	new_sounds->music_boss = sfMusic_createFromFile("./sounds/boss.ogg");
 	new_sounds->buf = sfSoundBuffer_createFromFile("./sounds/kalash.ogg");
 	new_sounds->sound = sfSound_create();
 	sfSound_setBuffer(new_sounds->sound, new_sounds->buf);
