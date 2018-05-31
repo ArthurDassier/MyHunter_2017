@@ -21,6 +21,7 @@ SRCS	=	srcs/main.c		\
 		srcs/oaso.c		\
 		srcs/utils.c		\
 		srcs/draw_birds.c	\
+		srcs/events.c		\
 
 OBJS	=	$(SRCS:.c=.o)
 

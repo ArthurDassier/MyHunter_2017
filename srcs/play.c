@@ -8,7 +8,7 @@
 #include "my.h"
 #include "hunter.h"
 
-void move_birds(t_sprite **birds)
+static void move_birds(t_sprite **birds)
 {
 	for (int nb = 0; birds[nb] != NULL; ++nb) {
 		if (birds[nb]->alive == 1)
@@ -18,7 +18,7 @@ void move_birds(t_sprite **birds)
 	}
 }
 
-void clocking(t_sprite *back, t_sprite **birds)
+static void clocking(t_sprite *back, t_sprite **birds)
 {
 	if (sfTime_asSeconds(sfClock_getElapsedTime(back->clock)) > 0.045) {
 		sfClock_restart(back->clock);
@@ -29,15 +29,16 @@ void clocking(t_sprite *back, t_sprite **birds)
 		move_birds(birds);
 }
 
-void birds_event(sfRenderWindow *window, t_sprite **birds,
-	t_sprite **cross, t_sounds *sounds)
+static void birds_event(sfRenderWindow *window, t_sprite **birds,
+			t_sprite **cross, t_sounds *sounds)
 {
 	draw_birds(window, birds, cross);
 	analyse_event(window, birds, sounds, cross);
 
 }
 
-void window_open(sfRenderWindow *window, t_sprite **cross, t_sounds *sounds)
+static void window_open(sfRenderWindow *window,
+			t_sprite **cross, t_sounds *sounds)
 {
 	t_sprite	*back = create_sprite("./textures/backg.png", 0, 0, 0);
 	t_sprite	**birds = init_birds(25);

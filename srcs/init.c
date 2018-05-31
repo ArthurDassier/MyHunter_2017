@@ -16,9 +16,9 @@ t_sprite	**init_birds(int nb)
 
 	while (i != nb) {
 		birds[i] = create_sprite("./textures/OUASO.png",
-		(rand()%2000 - 2000), rand()%700, rand()%10);
+		(rand() % 2000 - 2000), rand() % 700, rand() % 10);
 		birds[i]->rect = bird_rect();
-		birds[i]->forward = rand()%3 + 3;
+		birds[i]->forward = rand() % 3 + 3;
 		++i;
 	}
 	birds[i] = NULL;
