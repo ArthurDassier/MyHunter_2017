@@ -8,62 +8,60 @@
 #include "my.h"
 #include "hunter.h"
 
-void	draw_birds(sfRenderWindow *window, t_sprite **birds, t_sprite *cross)
+void move_birds(t_sprite **birds)
 {
-	int	i = 0;
-	sfVector2f	pos;
-
-	while (birds[i] != NULL) {
-		if (birds[i]->rec == 10)
-			birds[i]->rec = 0;
-		sfRenderWindow_drawSprite(window, birds[i]->sp, NULL);
-		if (birds[i]->alive == 1) {
-			sfSprite_setTextureRect(birds[i]->sp,
-				birds[i]->rect[birds[i]->rec]);
-			sfSprite_setPosition(birds[i]->sp, birds[i]->pos);
-		} else {
-			sfSprite_setTextureRect(birds[i]->sp,
-				birds[i]->rect[10]);
-			sfSprite_setPosition(birds[i]->sp, birds[i]->pos);
-			}
-		++i;
+	for (int nb = 0; birds[nb] != NULL; ++nb) {
+		if (birds[nb]->alive == 1)
+			birds[nb]->pos.x += birds[nb]->forward;
+		else
+			birds[nb]->pos.y += 5;
 	}
-	sfRenderWindow_drawSprite(window, cross->sp, NULL);
-	pos.x = sfMouse_getPositionRenderWindow(window).x - 50;
-	pos.y = sfMouse_getPositionRenderWindow(window).y - 50;
-	sfSprite_setPosition(cross->sp, pos);
+}
+
+void clocking(t_sprite *back, t_sprite **birds)
+{
+	if (sfTime_asSeconds(sfClock_getElapsedTime(back->clock)) > 0.045) {
+		sfClock_restart(back->clock);
+		for (int nb = 0; birds[nb] != NULL; ++nb)
+			++birds[nb]->rec;
+	}
+	if (sfTime_asSeconds(sfClock_getElapsedTime(back->clock)) > 0.001)
+		move_birds(birds);
+}
+
+void birds_event(sfRenderWindow *window, t_sprite **birds,
+	t_sprite **cross, t_sounds *sounds)
+{
+	draw_birds(window, birds, cross);
+	analyse_event(window, birds, sounds, cross);
+
+}
+
+void window_open(sfRenderWindow *window, t_sprite **cross, t_sounds *sounds)
+{
+	t_sprite	*back = create_sprite("./textures/backg.png", 0, 0, 0);
+	t_sprite	**birds = init_birds(25);
+
+	back->clock = sfClock_create();
+	while (sfRenderWindow_isOpen(window)) {
+		window_display(window);
+		sfRenderWindow_drawSprite(window, back->sp, NULL);
+		birds_event(window, birds, cross, sounds);
+		clocking(back, birds);
+	}
+	destroyer(back, birds, cross, sounds);
 }
 
 int	play(void)
 {
 	sfRenderWindow	*window = init_window();
-	t_sprite	*back = create_sprite("./textures/backg.png", 0, 0, 0);
-	t_sprite	**birds = init_birds(25);
-	t_sprite	*cross = create_sprite("./textures/crossahir1.png", 0, 0, 0);
 	t_sounds	*sounds = create_sounds();
+	t_sprite	**cross = malloc(sizeof(t_sprite) * 2);
 
+	cross[0] = create_sprite("./textures/crossahir1.png", 0, 0, 0);
+	cross[1] = create_sprite("./textures/xplosion.png", 0, 0, 0);
 	sfMusic_play(sounds->music1);
-	back->clock = sfClock_create();
-	while (sfRenderWindow_isOpen(window)) {
-		window_display(window);
-		sfRenderWindow_drawSprite(window, back->sp, NULL);
-		draw_birds(window, birds, cross);
-		analyse_event(window, birds, sounds);
-		if (sfTime_asSeconds(sfClock_getElapsedTime(back->clock)) > 0.001) {
-			for (int nb = 0; birds[nb] != NULL; ++nb) {
-				if (birds[nb]->alive == 1)
-					birds[nb]->pos.x += birds[nb]->forward;
-				else
-					birds[nb]->pos.y += 5;
-			}
-		}
-		if (sfTime_asSeconds(sfClock_getElapsedTime(back->clock)) > 0.045) {
-			sfClock_restart(back->clock);
-			for (int nb = 0; birds[nb] != NULL; ++nb)
-				++birds[nb]->rec;
-		}
-	}
+	window_open(window, cross, sounds);
 	sfRenderWindow_destroy(window);
-	destroyer(back, birds, cross, sounds);
 	return (0);
 }

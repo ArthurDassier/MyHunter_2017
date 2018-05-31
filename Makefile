@@ -15,11 +15,12 @@ CFLAGS	+=	-I./include
 
 NAME	=	my_hunter
 
-SRCS	=	srcs/main.c	\
-		srcs/play.c	\
-		srcs/init.c	\
-		srcs/oaso.c	\
-		srcs/utils.c	\
+SRCS	=	srcs/main.c		\
+		srcs/play.c		\
+		srcs/init.c		\
+		srcs/oaso.c		\
+		srcs/utils.c		\
+		srcs/draw_birds.c	\
 
 OBJS	=	$(SRCS:.c=.o)
 

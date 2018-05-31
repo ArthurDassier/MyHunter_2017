@@ -9,12 +9,14 @@
 #include "hunter.h"
 
 void destroyer(t_sprite *back, t_sprite **birds,
-	t_sprite *cross, t_sounds *sounds)
+	t_sprite **cross, t_sounds *sounds)
 {
 	sfSprite_destroy(back->sp);
 	sfTexture_destroy(back->texture);
-	sfSprite_destroy(cross->sp);
-	sfTexture_destroy(cross->texture);
+	sfSprite_destroy(cross[0]->sp);
+	sfTexture_destroy(cross[0]->texture);
+	sfSprite_destroy(cross[1]->sp);
+	sfTexture_destroy(cross[1]->texture);
 	sfClock_destroy(back->clock);
 	for (int nb = 0; birds[nb] != NULL; ++nb) {
 		sfSprite_destroy(birds[nb]->sp);

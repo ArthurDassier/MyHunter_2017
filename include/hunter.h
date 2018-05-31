@@ -32,10 +32,10 @@ t_sprite	*create_sprite(char *, int, int, int);
 sfIntRect	*bird_rect(void);
 void		window_display(sfRenderWindow *);
 t_sprite	**init_birds(int);
-void		analyse_event(sfRenderWindow *, t_sprite **, t_sounds *);
+void	analyse_event(sfRenderWindow *, t_sprite **, t_sounds *, t_sprite **);
 int		play(void);
 t_sounds	*create_sounds(void);
-void destroyer(t_sprite *, t_sprite **,
-	t_sprite *, t_sounds *);
+void		destroyer(t_sprite *, t_sprite **, t_sprite **, t_sounds *);
+void		draw_birds(sfRenderWindow *, t_sprite **, t_sprite **);
 
 #endif
