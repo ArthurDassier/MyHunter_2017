@@ -49,8 +49,9 @@ void	analyse_event(t_game *game, t_sprite **birds,
 
 	if (game->boss_hit >= 6) {
 		birds[0]->alive = 0;
-		if (sfTime_asSeconds(sfClock_getElapsedTime(birds[0]->clock)) > 8.5)
-		sfRenderWindow_close(game->window);
+		if (sfTime_asSeconds(sfClock_getElapsedTime(birds[0]->clock))
+			> 8.5)
+			sfRenderWindow_close(game->window);
 	}
 	while (sfRenderWindow_pollEvent(game->window, &event)) {
 		if (event.type == sfEvtMouseButtonPressed) {

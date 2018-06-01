@@ -24,6 +24,7 @@ SRCS	=	srcs/main.c		\
 		srcs/events.c		\
 		srcs/life.c		\
 		srcs/level.c		\
+		srcs/destroy.c		\
 
 OBJS	=	$(SRCS:.c=.o)
 

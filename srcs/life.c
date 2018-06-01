@@ -8,23 +8,31 @@
 #include "my.h"
 #include "hunter.h"
 
-int draw_life(sfRenderWindow *window, t_sprite *heart, t_sprite **birds)
+static int count_birds(t_sprite **birds, int *passed)
 {
-	int	i = 0;
 	int	nb = 0;
-	int	passed = 3;
 	int	win = -1;
 
 	while (birds[nb] != NULL) {
 		if (birds[nb]->pos.x > 1900) {
 			birds[nb]->pos.x = 2000;
-			--passed;
+			--*passed;
 			birds[nb]->alive = 0;
 		}
 		if (birds[nb]->alive == 1)
-			win += 2;
+		win += 2;
 		++nb;
 	}
+	return (win);
+}
+
+int draw_life(sfRenderWindow *window, t_sprite *heart, t_sprite **birds)
+{
+	int	i = 0;
+	int	passed = 3;
+	int	win = -1;
+
+	win = count_birds(birds, &passed);
 	if (passed <= 0) {
 		sfRenderWindow_close(window);
 		return (0);

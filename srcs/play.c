@@ -46,7 +46,7 @@ static void birds_event(t_game *game, t_sprite **birds, t_sprite **cross,
 static void window_open(t_game *game, t_sprite **cross, t_sounds *sounds)
 {
 	t_sprite	*back = create_sprite("./textures/backg.png", 0, 0, 0);
-	t_sprite	**birds = init_birds(1);
+	t_sprite	**birds = init_birds(25);
 	t_sprite	*heart = create_sprite("./textures/heart.png", 1300,
 								850, 0);
 
@@ -78,7 +78,6 @@ int	play(void)
 	cross[1]->clock = sfClock_create();
 	sfMusic_play(sounds->music1);
 	window_open(game, cross, sounds);
-	sfRenderWindow_destroy(game->window);
-	free(game);
+	destroy_game(game);
 	return (0);
 }
