@@ -51,17 +51,32 @@ t_sounds *create_sounds(void)
 	return (new_sounds);
 }
 
-sfRenderWindow *init_window(void)
+t_text *create_text(char *font)
 {
-	sfRenderWindow	*window;
+	t_text *new_text = malloc(sizeof(t_text));
+
+	new_text->text = sfText_create();
+	new_text->font = sfFont_createFromFile(font);
+	sfText_setFont(new_text->text, new_text->font);
+	return (new_text);
+}
+
+t_game *init_game(void)
+{
+	t_game		*game = malloc(sizeof(t_game));
 	sfVideoMode	video_mode;
 
 	video_mode.width = WIDTH_WID;
 	video_mode.height = HEIGHT_WID;
 	video_mode.bitsPerPixel = BPP;
-	window = sfRenderWindow_create(video_mode, "MyWindow",
+	game->window = sfRenderWindow_create(video_mode, "MyWindow",
 	sfDefaultStyle, NULL);
-	sfRenderWindow_setFramerateLimit(window, 60);
-	sfRenderWindow_setMouseCursorVisible(window, sfFalse);
-	return (window);
+	sfRenderWindow_setFramerateLimit(game->window, 60);
+	sfRenderWindow_setMouseCursorVisible(game->window, sfFalse);
+	game->tx_sc = create_text("./textures/arial.ttf");
+	game->score = 0;
+	game->level = 0;
+	game->boss_hit = 0;
+	sfText_setString(game->tx_sc->text, my_sti(game->score));
+	return (game);
 }

@@ -14,7 +14,8 @@
 static void help()
 {
 	my_printf("Help :\nMouse click on the birds to earn points !\n");
-	my_printf("Then you'll see your score on the screen.\n");
+	my_printf("Then, you'll see your score on the screen.\n");
+	my_printf("There is 3 levels in this game with one boss.\n");
 	my_printf("Have fun playing My Hunter ! :)\n");
 
 }

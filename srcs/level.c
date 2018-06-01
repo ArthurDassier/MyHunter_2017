@@ -33,23 +33,22 @@ static void spawn_boss(t_sprite **birds, t_sounds *sounds)
 	birds[0]->pos.y = -400;
 	birds[0]->alive = 1;
 	birds[0]->forward = 2;
+	birds[0]->clock = sfClock_create();
 	sfSprite_setScale(birds[0]->sp, new_scl);
 }
 
-void level(t_sprite *back, int *win, t_sprite **birds, t_sounds *sounds)
+void level(t_sprite *back, t_game *game, t_sprite **birds, t_sounds *sounds)
 {
-	static int	level = 0;
-
-	if (*win == 0) {
-		++level;
-		*win = -1;
-		if (level == 1)
+	if (game->win == 0) {
+		++game->level;
+		game->win = -1;
+		if (game->level == 1)
 			reset_birds(birds);
-		else
+		if (game->level == 2)
 			spawn_boss(birds, sounds);
 	}
-	if (level == 1)
+	if (game->level == 1)
 		sfSprite_setColor(back->sp, sfYellow);
-	if (level == 2)
+	if (game->level >= 2)
 		sfSprite_setColor(back->sp, sfRed);
 }

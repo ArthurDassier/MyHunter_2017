@@ -36,30 +36,30 @@ static void clocking(t_sprite *back, t_sprite **birds)
 		move_birds(birds);
 }
 
-static void birds_event(sfRenderWindow *window, t_sprite **birds,
-			t_sprite **cross, t_sounds *sounds)
+static void birds_event(t_game *game, t_sprite **birds, t_sprite **cross,
+			t_sounds *sounds)
 {
-	analyse_event(window, birds, sounds, cross);
-	draw_birds(window, birds, cross);
+	analyse_event(game, birds, sounds, cross);
+	draw_birds(game->window, birds, cross);
 }
 
-static void window_open(sfRenderWindow *window,
-			t_sprite **cross, t_sounds *sounds)
+static void window_open(t_game *game, t_sprite **cross, t_sounds *sounds)
 {
 	t_sprite	*back = create_sprite("./textures/backg.png", 0, 0, 0);
-	t_sprite	**birds = init_birds(15);
+	t_sprite	**birds = init_birds(1);
 	t_sprite	*heart = create_sprite("./textures/heart.png", 1300,
 								850, 0);
-	int	win = -1;
 
+	game->win = -1;
 	back->clock = sfClock_create();
-	while (sfRenderWindow_isOpen(window)) {
-		window_display(window);
-		sfRenderWindow_drawSprite(window, back->sp, NULL);
-		level(back, &win, birds, sounds);
-		birds_event(window, birds, cross, sounds);
+	while (sfRenderWindow_isOpen(game->window)) {
+		window_display(game->window);
+		sfRenderWindow_drawSprite(game->window, back->sp, NULL);
+		sfRenderWindow_drawText(game->window, game->tx_sc->text, NULL);
+		level(back, game, birds, sounds);
+		birds_event(game, birds, cross, sounds);
 		clocking(back, birds);
-		win = draw_life(window, heart, birds);
+		game->win = draw_life(game->window, heart, birds);
 	}
 	sfSprite_destroy(heart->sp);
 	sfTexture_destroy(heart->texture);
@@ -69,7 +69,7 @@ static void window_open(sfRenderWindow *window,
 
 int	play(void)
 {
-	sfRenderWindow	*window = init_window();
+	t_game		*game = init_game();
 	t_sounds	*sounds = create_sounds();
 	t_sprite	**cross = malloc(sizeof(t_sprite) * 2);
 
@@ -77,7 +77,8 @@ int	play(void)
 	cross[1] = create_sprite("./textures/xplosion.png", 0, 0, 0);
 	cross[1]->clock = sfClock_create();
 	sfMusic_play(sounds->music1);
-	window_open(window, cross, sounds);
-	sfRenderWindow_destroy(window);
+	window_open(game, cross, sounds);
+	sfRenderWindow_destroy(game->window);
+	free(game);
 	return (0);
 }
