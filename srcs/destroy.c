@@ -43,8 +43,8 @@ void destroyer(t_sprite *back, t_sprite **birds,
 void destroy_game(t_game *game)
 {
 	sfText_destroy(game->tx_sc->text);
-	free(game->tx_sc);
 	sfFont_destroy(game->tx_sc->font);
 	sfRenderWindow_destroy(game->window);
+	free(game->tx_sc);
 	free(game);
 }

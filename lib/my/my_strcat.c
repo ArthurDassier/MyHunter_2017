@@ -5,18 +5,24 @@
 ** strcat
 */
 
-char *my_strcat(char *dest, char const *src)
+char *my_strcat(char *dest, char *src)
 {
+	char	*tmp = malloc(sizeof(char) * (my_strlen(dest) +
+	my_strlen(src) + 1));
 	int	i = 0;
 	int	j = 0;
+	int	count = 0;
 
 	while (dest[i] != '\0') {
-		i++;
+		tmp[count] = dest[i];
+		++count;
+		++i;
 	}
 	while (src[j] != '\0') {
-		dest[i] = src[j];
-		i++;
-		j++;
+		tmp[count] = src[j];
+		++count;
+		++j;
 	}
-	return (dest);
+	tmp[count] = '\0';
+	return (tmp);
 }

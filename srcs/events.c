@@ -19,7 +19,7 @@ static int get_bird(t_game *game, t_sprite *birds)
 		<= birds->pos.y + 85) {
 			game->score += 10;
 			sfText_setString(game->tx_sc->text,
-				my_sti(game->score));
+				my_strcat("Score : ", my_sti(game->score)));
 			birds->alive = 0;
 			return (0);
 		}

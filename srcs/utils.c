@@ -23,7 +23,6 @@ char *my_sti(int nb)
 		nb /= 10;
 	}
 	str[i] = '\0';
-	str = my_strcat(str, " : erocS");
 	my_revstr(str);
 	return (str);
 }
