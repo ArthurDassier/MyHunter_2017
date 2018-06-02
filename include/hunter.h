@@ -43,19 +43,24 @@ typedef struct s_game
 	int		boss_hit;
 	int		level;
 	int		state;
+	int		nb_birds;
 } 			t_game;
 
 typedef struct s_menu
 {
 	t_sprite	*back;
-	t_sprite	*button1;
-	t_sprite	*button2;
+	t_sprite	*button_play;
+	t_sprite	*button_quit;
+	t_sprite	*button_easy;
+	t_sprite	*button_normal;
+	t_sprite	*button_hell;
 } 			t_menu;
 
 t_menu 		*init_menu(void);
 void		menu_loop(t_game *, t_menu *);
-void		state_button_one(t_game *, t_menu *);
+void		state_button(t_game *, t_sprite *);
 void		trigger_button(t_game *, t_menu *);
+void		trigger_choose(t_game *, t_menu *);
 sfIntRect 	pixel_tall(int, int, int, int);
 t_game		*init_game(void);
 t_sprite	*create_sprite(char *, int, int, int);
@@ -65,12 +70,12 @@ t_sprite	**init_birds(int);
 void	analyse_event(t_game *, t_sprite **, t_sounds *, t_sprite **);
 int		play(void);
 t_sounds	*create_sounds(void);
-void		destroyer(t_sprite *, t_sprite **, t_sprite **, t_sounds *);
+void		destroyer(t_sprite *, t_sprite **);
 void		draw_birds(sfRenderWindow *, t_sprite **, t_sprite **);
 int		draw_life(t_game *, t_sprite *, t_sprite **);
 void		level(t_sprite *, t_game *, t_sprite **, t_sounds *);
 char		*my_sti(int);
 void		event_boss(t_game *);
-void		destroy_game(t_game *, t_menu *);
+void		destroy_game(t_game *, t_menu *, t_sounds *, t_sprite **);
 
 #endif

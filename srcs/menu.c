@@ -14,8 +14,12 @@ t_menu *init_menu()
 	t_menu *new = malloc(sizeof(t_menu));
 
 	new->back = create_sprite("./textures/menu.png", 0, 0, 0);
-	new->button1 = create_sprite("./textures/buttons.png", 800, 200, 0);
-	new->button2 = create_sprite("./textures/buttons.png", 800, 400, 0);
+	new->button_play = create_sprite("./textures/button.png", 800, 200, 0);
+	new->button_quit = create_sprite("./textures/button.png", 800, 400, 0);
+	new->button_easy = create_sprite("./textures/button.png", 800, 200, 0);
+	new->button_normal = create_sprite("./textures/button.png",
+								800, 400, 0);
+	new->button_hell = create_sprite("./textures/button.png", 800, 600, 0);
 	return (new);
 }
 
@@ -33,17 +37,59 @@ void event_menu(t_game *game, t_menu *menu)
 	}
 }
 
+void event_choose(t_game *game, t_menu *menu)
+{
+	sfEvent	event;
+
+	while (sfRenderWindow_pollEvent(game->window, &event)) {
+		if (event.type == sfEvtMouseButtonPressed)
+			trigger_choose(game, menu);
+		if (event.type == sfEvtClosed) {
+			my_printf("pfff, looser.\n");
+			sfRenderWindow_close(game->window);
+		}
+	}
+}
+
+void choose_mode(t_game *game, t_menu *mn)
+{
+	window_display(game->window);
+	event_choose(game, mn);
+	state_button(game, mn->button_easy);
+	state_button(game, mn->button_normal);
+	state_button(game, mn->button_hell);
+	sfRenderWindow_drawSprite(game->window, mn->back->sp, NULL);
+	sfSprite_setPosition(mn->button_easy->sp,
+		mn->button_easy->pos);
+	sfSprite_setPosition(mn->button_hell->sp,
+		mn->button_hell->pos);
+	sfSprite_setPosition(mn->button_normal->sp,
+		mn->button_normal->pos);
+	sfRenderWindow_drawSprite(game->window,
+		mn->button_easy->sp, NULL);
+	sfRenderWindow_drawSprite(game->window,
+		mn->button_normal->sp, NULL);
+	sfRenderWindow_drawSprite(game->window,
+		mn->button_hell->sp, NULL);
+}
+
 void menu_loop(t_game *game, t_menu *mn)
 {
-
 	while (sfRenderWindow_isOpen(game->window) && game->state == 0) {
 		window_display(game->window);
 		event_menu(game, mn);
+		state_button(game, mn->button_play);
+		state_button(game, mn->button_quit);
 		sfRenderWindow_drawSprite(game->window, mn->back->sp, NULL);
-		sfRenderWindow_drawSprite(game->window, mn->button1->sp, NULL);
-		sfSprite_setPosition(mn->button1->sp, mn->button1->pos);
-		sfRenderWindow_drawSprite(game->window, mn->button2->sp, NULL);
-		sfSprite_setPosition(mn->button2->sp, mn->button2->pos);
-		state_button_one(game, mn);
+		sfSprite_setPosition(mn->button_play->sp,
+			mn->button_play->pos);
+		sfSprite_setPosition(mn->button_quit->sp,
+			mn->button_quit->pos);
+		sfRenderWindow_drawSprite(game->window,
+			mn->button_quit->sp, NULL);
+		sfRenderWindow_drawSprite(game->window,
+			mn->button_play->sp, NULL);
 	}
+	while (sfRenderWindow_isOpen(game->window) && game->state == 1)
+		choose_mode(game, mn);
 }

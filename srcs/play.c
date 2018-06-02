@@ -47,13 +47,13 @@ static void birds_event(t_game *game, t_sprite **birds, t_sprite **cross,
 static void window_open(t_game *game, t_sprite **cross, t_sounds *sounds)
 {
 	t_sprite	*back = create_sprite("./textures/backg.png", 0, 0, 0);
-	t_sprite	**birds = init_birds(25);
+	t_sprite	**birds = init_birds(game->nb_birds);
 	t_sprite	*heart = create_sprite("./textures/heart.png", 1300,
 								850, 0);
 
 	game->win = -1;
 	back->clock = sfClock_create();
-	while (sfRenderWindow_isOpen(game->window) && game->state == 1) {
+	while (sfRenderWindow_isOpen(game->window) && game->state == 2) {
 		window_display(game->window);
 		sfRenderWindow_drawSprite(game->window, back->sp, NULL);
 		sfRenderWindow_drawText(game->window, game->tx_sc->text, NULL);
@@ -66,7 +66,7 @@ static void window_open(t_game *game, t_sprite **cross, t_sounds *sounds)
 	sfSprite_destroy(heart->sp);
 	sfTexture_destroy(heart->texture);
 	free(heart);
-	destroyer(back, birds, cross, sounds);
+	destroyer(back, birds);
 }
 
 int	play(void)
@@ -84,9 +84,10 @@ int	play(void)
 		game->score = 0;
 		menu_loop(game, menu);
 		sfRenderWindow_setMouseCursorVisible(game->window, sfFalse);
-		window_open(game, cross, sounds);
+		if (sfRenderWindow_isOpen(game->window))
+			window_open(game, cross, sounds);
 		sfRenderWindow_setMouseCursorVisible(game->window, sfTrue);
 	}
-	destroy_game(game, menu);
+	destroy_game(game, menu, sounds, cross);
 	return (0);
 }
