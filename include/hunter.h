@@ -42,8 +42,21 @@ typedef struct s_game
 	int		win;
 	int		boss_hit;
 	int		level;
+	int		state;
 } 			t_game;
 
+typedef struct s_menu
+{
+	t_sprite	*back;
+	t_sprite	*button1;
+	t_sprite	*button2;
+} 			t_menu;
+
+t_menu 		*init_menu(void);
+void		menu_loop(t_game *, t_menu *);
+void		state_button_one(t_game *, t_menu *);
+void		trigger_button(t_game *, t_menu *);
+sfIntRect 	pixel_tall(int, int, int, int);
 t_game		*init_game(void);
 t_sprite	*create_sprite(char *, int, int, int);
 sfIntRect	*bird_rect(void);
@@ -54,10 +67,10 @@ int		play(void);
 t_sounds	*create_sounds(void);
 void		destroyer(t_sprite *, t_sprite **, t_sprite **, t_sounds *);
 void		draw_birds(sfRenderWindow *, t_sprite **, t_sprite **);
-int		draw_life(sfRenderWindow *, t_sprite *, t_sprite **);
+int		draw_life(t_game *, t_sprite *, t_sprite **);
 void		level(t_sprite *, t_game *, t_sprite **, t_sounds *);
 char		*my_sti(int);
 void		event_boss(t_game *);
-void		destroy_game(t_game *);
+void		destroy_game(t_game *, t_menu *);
 
 #endif

@@ -36,7 +36,7 @@ static void kill(t_game *game, t_sprite **birds)
 			return;
 		++nb;
 	}
-	if (game->level == 2) {
+	if (game->level == 2 && birds[0]->pos.x > 100) {
 		++game->boss_hit;
 		sfClock_restart(birds[0]->clock);
 	}
@@ -51,7 +51,7 @@ void	analyse_event(t_game *game, t_sprite **birds,
 		birds[0]->alive = 0;
 		if (sfTime_asSeconds(sfClock_getElapsedTime(birds[0]->clock))
 			> 8.5)
-			sfRenderWindow_close(game->window);
+			game->state = 0;
 	}
 	while (sfRenderWindow_pollEvent(game->window, &event)) {
 		if (event.type == sfEvtMouseButtonPressed) {

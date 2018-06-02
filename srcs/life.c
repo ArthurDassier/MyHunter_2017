@@ -26,7 +26,7 @@ static int count_birds(t_sprite **birds, int *passed)
 	return (win);
 }
 
-int draw_life(sfRenderWindow *window, t_sprite *heart, t_sprite **birds)
+int draw_life(t_game *game, t_sprite *heart, t_sprite **birds)
 {
 	int	i = 0;
 	int	passed = 3;
@@ -34,12 +34,12 @@ int draw_life(sfRenderWindow *window, t_sprite *heart, t_sprite **birds)
 
 	win = count_birds(birds, &passed);
 	if (passed <= 0) {
-		sfRenderWindow_close(window);
+		game->state = 0;
 		return (0);
 	}
 	while (i != passed) {
 		sfSprite_setPosition(heart->sp, heart->pos);
-		sfRenderWindow_drawSprite(window, heart->sp, NULL);
+		sfRenderWindow_drawSprite(game->window, heart->sp, NULL);
 		heart->pos.x += 150;
 		++i;
 	}

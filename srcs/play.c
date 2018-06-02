@@ -7,6 +7,7 @@
 
 #include "my.h"
 #include "hunter.h"
+#include "printf.h"
 
 static void move_birds(t_sprite **birds)
 {
@@ -52,15 +53,16 @@ static void window_open(t_game *game, t_sprite **cross, t_sounds *sounds)
 
 	game->win = -1;
 	back->clock = sfClock_create();
-	while (sfRenderWindow_isOpen(game->window)) {
+	while (sfRenderWindow_isOpen(game->window) && game->state == 1) {
 		window_display(game->window);
 		sfRenderWindow_drawSprite(game->window, back->sp, NULL);
 		sfRenderWindow_drawText(game->window, game->tx_sc->text, NULL);
 		level(back, game, birds, sounds);
 		birds_event(game, birds, cross, sounds);
 		clocking(back, birds);
-		game->win = draw_life(game->window, heart, birds);
+		game->win = draw_life(game, heart, birds);
 	}
+	my_printf("Your final score is :\t%d\n", game->score);
 	sfSprite_destroy(heart->sp);
 	sfTexture_destroy(heart->texture);
 	free(heart);
@@ -70,6 +72,7 @@ static void window_open(t_game *game, t_sprite **cross, t_sounds *sounds)
 int	play(void)
 {
 	t_game		*game = init_game();
+	t_menu		*menu = init_menu();
 	t_sounds	*sounds = create_sounds();
 	t_sprite	**cross = malloc(sizeof(t_sprite) * 2);
 
@@ -77,7 +80,13 @@ int	play(void)
 	cross[1] = create_sprite("./textures/xplosion.png", 0, 0, 0);
 	cross[1]->clock = sfClock_create();
 	sfMusic_play(sounds->music1);
-	window_open(game, cross, sounds);
-	destroy_game(game);
+	while (sfRenderWindow_isOpen(game->window)) {
+		game->score = 0;
+		menu_loop(game, menu);
+		sfRenderWindow_setMouseCursorVisible(game->window, sfFalse);
+		window_open(game, cross, sounds);
+		sfRenderWindow_setMouseCursorVisible(game->window, sfTrue);
+	}
+	destroy_game(game, menu);
 	return (0);
 }

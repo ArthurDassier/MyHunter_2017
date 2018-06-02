@@ -5,6 +5,8 @@
 ** strcat
 */
 
+#include "../../include/my.h"
+
 char *my_strcat(char *dest, char *src)
 {
 	char	*tmp = malloc(sizeof(char) * (my_strlen(dest) +

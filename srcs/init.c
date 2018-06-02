@@ -69,14 +69,14 @@ t_game *init_game(void)
 	video_mode.width = WIDTH_WID;
 	video_mode.height = HEIGHT_WID;
 	video_mode.bitsPerPixel = BPP;
-	game->window = sfRenderWindow_create(video_mode, "MyWindow",
+	game->window = sfRenderWindow_create(video_mode, "Battlefield 3",
 	sfDefaultStyle, NULL);
 	sfRenderWindow_setFramerateLimit(game->window, 60);
-	sfRenderWindow_setMouseCursorVisible(game->window, sfFalse);
-	game->tx_sc = create_text("./textures/arial.ttf");
+	game->tx_sc = create_text("./textures/Kenney Mini Square.ttf");
 	game->score = 0;
 	game->level = 0;
 	game->boss_hit = 0;
+	game->state = 0;
 	sfText_setString(game->tx_sc->text,
 		my_strcat("Score : ", my_sti(game->score)));
 	return (game);

@@ -16,6 +16,8 @@ CFLAGS	+=	-I./include
 NAME	=	my_hunter
 
 SRCS	=	srcs/main.c		\
+		srcs/menu.c		\
+		srcs/menu_buttons.c	\
 		srcs/play.c		\
 		srcs/init.c		\
 		srcs/oaso.c		\

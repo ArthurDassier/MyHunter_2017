@@ -40,11 +40,18 @@ void destroyer(t_sprite *back, t_sprite **birds,
 	my_free(back, birds, cross, sounds);
 }
 
-void destroy_game(t_game *game)
+void destroy_game(t_game *game, t_menu *menu)
 {
+	sfSprite_destroy(menu->back->sp);
+	sfTexture_destroy(menu->back->texture);
+	sfSprite_destroy(menu->button1->sp);
+	sfTexture_destroy(menu->button1->texture);
+	sfSprite_destroy(menu->button2->sp);
+	sfTexture_destroy(menu->button2->texture);
 	sfText_destroy(game->tx_sc->text);
 	sfFont_destroy(game->tx_sc->font);
 	sfRenderWindow_destroy(game->window);
+	free(menu);
 	free(game->tx_sc);
 	free(game);
 }
