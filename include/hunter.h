@@ -58,7 +58,7 @@ typedef struct s_menu
 	t_text		**text_buttons;
 } 			t_menu;
 
-t_menu 		*init_menu(void);
+t_menu		*init_menu(void);
 void		menu_loop(t_game *, t_menu *);
 void		state_button(t_game *, t_sprite *);
 void		trigger_button(t_game *, t_menu *);
@@ -81,6 +81,6 @@ void		level(t_sprite *, t_game *, t_sprite **, t_sounds *);
 char		*my_sti(int);
 void		event_boss(t_game *);
 void		destroy_game(t_game *, t_menu *, t_sounds *, t_sprite **);
-void		reset(t_game *);
+void		reset(t_game *, t_sounds *);
 
 #endif

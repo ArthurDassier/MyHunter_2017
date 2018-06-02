@@ -33,8 +33,10 @@ void window_display(sfRenderWindow *window)
 	sfRenderWindow_clear(window, sfBlack);
 }
 
-void reset(t_game *game)
+void reset(t_game *game, t_sounds *sounds)
 {
+	sfMusic_stop(sounds->music_boss);
+	sfMusic_play(sounds->music1);
 	game->score = 0;
 	game->level = 0;
 	game->boss_hit = 0;

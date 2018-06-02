@@ -80,8 +80,8 @@ int	play(void)
 	cross[1]->clock = sfClock_create();
 	sfMusic_play(sounds->music1);
 	while (sfRenderWindow_isOpen(game->window)) {
-		reset(game);
 		menu_loop(game, menu);
+		reset(game, sounds);
 		sfRenderWindow_setMouseCursorVisible(game->window, sfFalse);
 		if (sfRenderWindow_isOpen(game->window))
 			window_open(game, cross, sounds);

@@ -13,12 +13,12 @@
 
 static void help()
 {
-	my_printf("Help :\nMouse click on the birds to earn points !\n");
+	my_printf("Help\t:\nMouse click on the birds to earn points !\n");
 	my_printf("Then, you'll see your score on the screen.\n");
 	my_printf("There is 3 levels in this game with one boss.\n");
-	my_printf("You'll have to shoot him a lot of times before he die\n");
+	my_printf("The boss have a spawn invincibility and\n");
+	my_printf("you have to shoot him several times before he die.\n");
 	my_printf("Have fun playing My Hunter ! :)\n");
-
 }
 
 int main(int ac, char **av, char **env)
