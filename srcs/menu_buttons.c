@@ -52,6 +52,38 @@ void trigger_button(t_game *game, t_menu *menu)
 	}
 }
 
+static void trigger_choose_part_three(t_game *game, t_menu *menu)
+{
+	if (sfMouse_getPositionRenderWindow(game->window).x
+	>= menu->button_hell->pos.x &&
+	sfMouse_getPositionRenderWindow(game->window).x
+	<= menu->button_hell->pos.x + 160) {
+		if (sfMouse_getPositionRenderWindow(game->window).y
+		>= menu->button_hell->pos.y
+		&& sfMouse_getPositionRenderWindow(game->window).y
+		<= menu->button_hell->pos.y + 70) {
+			game->nb_birds = 50;
+			game->state = 2;
+		}
+	}
+}
+
+static void trigger_choose_part_two(t_game *game, t_menu *menu)
+{
+	if (sfMouse_getPositionRenderWindow(game->window).x
+	>= menu->button_normal->pos.x &&
+	sfMouse_getPositionRenderWindow(game->window).x
+	<= menu->button_normal->pos.x + 160) {
+		if (sfMouse_getPositionRenderWindow(game->window).y
+		>= menu->button_normal->pos.y
+		&& sfMouse_getPositionRenderWindow(game->window).y
+		<= menu->button_normal->pos.y + 70) {
+			game->nb_birds = 25;
+			game->state = 2;
+		}
+	}
+}
+
 void trigger_choose(t_game *game, t_menu *menu)
 {
 	if (sfMouse_getPositionRenderWindow(game->window).x
@@ -66,28 +98,6 @@ void trigger_choose(t_game *game, t_menu *menu)
 			game->state = 2;
 		}
 	}
-	if (sfMouse_getPositionRenderWindow(game->window).x
-	>= menu->button_normal->pos.x &&
-	sfMouse_getPositionRenderWindow(game->window).x
-	<= menu->button_normal->pos.x + 160) {
-		if (sfMouse_getPositionRenderWindow(game->window).y
-		>= menu->button_normal->pos.y
-		&& sfMouse_getPositionRenderWindow(game->window).y
-		<= menu->button_normal->pos.y + 70) {
-			game->nb_birds = 25;
-			game->state = 2;
-		}
-	}
-	if (sfMouse_getPositionRenderWindow(game->window).x
-	>= menu->button_hell->pos.x &&
-	sfMouse_getPositionRenderWindow(game->window).x
-	<= menu->button_hell->pos.x + 160) {
-		if (sfMouse_getPositionRenderWindow(game->window).y
-		>= menu->button_hell->pos.y
-		&& sfMouse_getPositionRenderWindow(game->window).y
-		<= menu->button_hell->pos.y + 70) {
-			game->nb_birds = 50;
-			game->state = 2;
-		}
-	}
+	trigger_choose_part_two(game, menu);
+	trigger_choose_part_three(game, menu);
 }
