@@ -12,11 +12,11 @@ t_text	**init_text_menu(void)
 {
 	t_text	**new = malloc(sizeof(t_text) * 6);
 
-	new[0] = create_text("./textures/Kenney Mini Square.ttf");
-	new[1] = create_text("./textures/Kenney Mini Square.ttf");
-	new[2] = create_text("./textures/Kenney Mini Square.ttf");
-	new[3] = create_text("./textures/Kenney Mini Square.ttf");
-	new[4] = create_text("./textures/Kenney Mini Square.ttf");
+	new[0] = create_text("./textures/Kenney Mini Square.ttf", 850, 225);
+	new[1] = create_text("./textures/Kenney Mini Square.ttf", 857, 425);
+	new[2] = create_text("./textures/Kenney Mini Square.ttf", 850, 225);
+	new[3] = create_text("./textures/Kenney Mini Square.ttf", 830, 425);
+	new[4] = create_text("./textures/Kenney Mini Square.ttf", 857, 625);
 	sfText_setString(new[0]->text, "Play");
 	sfText_setString(new[1]->text, "Quit");
 	sfText_setString(new[2]->text, "Easy");

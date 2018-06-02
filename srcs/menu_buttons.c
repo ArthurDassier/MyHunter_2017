@@ -11,7 +11,7 @@
 void state_button(t_game *game, t_sprite *button)
 {
 	sfIntRect stand = pixel_tall(85, 35, 60, 200);
-	sfIntRect press = pixel_tall(85, 35, 160, 200);
+	sfIntRect press = pixel_tall(85, 35, 155, 200);
 
 	if (sfMouse_getPositionRenderWindow(game->window).x
 	>= button->pos.x &&

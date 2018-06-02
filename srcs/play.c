@@ -62,7 +62,6 @@ static void window_open(t_game *game, t_sprite **cross, t_sounds *sounds)
 		clocking(back, birds);
 		game->win = draw_life(game, heart, birds);
 	}
-	my_printf("Your final score is :\t%d\n", game->score);
 	sfSprite_destroy(heart->sp);
 	sfTexture_destroy(heart->texture);
 	free(heart);
@@ -81,13 +80,14 @@ int	play(void)
 	cross[1]->clock = sfClock_create();
 	sfMusic_play(sounds->music1);
 	while (sfRenderWindow_isOpen(game->window)) {
-		game->score = 0;
+		reset(game);
 		menu_loop(game, menu);
 		sfRenderWindow_setMouseCursorVisible(game->window, sfFalse);
 		if (sfRenderWindow_isOpen(game->window))
 			window_open(game, cross, sounds);
 		sfRenderWindow_setMouseCursorVisible(game->window, sfTrue);
 	}
+	my_printf("Your final score is :\t%d\n", game->score);
 	destroy_game(game, menu, sounds, cross);
 	return (0);
 }

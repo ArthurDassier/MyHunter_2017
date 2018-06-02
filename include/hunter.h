@@ -24,6 +24,7 @@ typedef struct s_text
 {
 	sfText		*text;
 	sfFont		*font;
+	sfVector2f	pos;
 }			t_text;
 
 typedef struct s_sounds
@@ -72,7 +73,7 @@ t_sprite	**init_birds(int);
 void	analyse_event(t_game *, t_sprite **, t_sounds *, t_sprite **);
 int		play(void);
 t_sounds	*create_sounds(void);
-t_text		*create_text(char *);
+t_text		*create_text(char *, int, int);
 void		destroyer(t_sprite *, t_sprite **);
 void		draw_birds(sfRenderWindow *, t_sprite **, t_sprite **);
 int		draw_life(t_game *, t_sprite *, t_sprite **);
@@ -80,5 +81,6 @@ void		level(t_sprite *, t_game *, t_sprite **, t_sounds *);
 char		*my_sti(int);
 void		event_boss(t_game *);
 void		destroy_game(t_game *, t_menu *, t_sounds *, t_sprite **);
+void		reset(t_game *);
 
 #endif

@@ -51,12 +51,14 @@ t_sounds *create_sounds(void)
 	return (new_sounds);
 }
 
-t_text *create_text(char *font)
+t_text *create_text(char *font, int x, int y)
 {
 	t_text *new_text = malloc(sizeof(t_text));
 
 	new_text->text = sfText_create();
 	new_text->font = sfFont_createFromFile(font);
+	new_text->pos.x = x;
+	new_text->pos.y = y;
 	sfText_setFont(new_text->text, new_text->font);
 	return (new_text);
 }
@@ -72,7 +74,7 @@ t_game *init_game(void)
 	game->window = sfRenderWindow_create(video_mode, "Battlefield 3",
 	sfDefaultStyle, NULL);
 	sfRenderWindow_setFramerateLimit(game->window, 60);
-	game->tx_sc = create_text("./textures/Kenney Mini Square.ttf");
+	game->tx_sc = create_text("./textures/Kenney Mini Square.ttf", 0, 0);
 	game->score = 0;
 	game->level = 0;
 	game->boss_hit = 0;

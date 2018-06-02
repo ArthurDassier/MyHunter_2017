@@ -32,3 +32,10 @@ void window_display(sfRenderWindow *window)
 	sfRenderWindow_display(window);
 	sfRenderWindow_clear(window, sfBlack);
 }
+
+void reset(t_game *game)
+{
+	game->score = 0;
+	game->level = 0;
+	game->boss_hit = 0;
+}
