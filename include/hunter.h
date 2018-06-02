@@ -54,6 +54,7 @@ typedef struct s_menu
 	t_sprite	*button_easy;
 	t_sprite	*button_normal;
 	t_sprite	*button_hell;
+	t_text		**text_buttons;
 } 			t_menu;
 
 t_menu 		*init_menu(void);
@@ -61,6 +62,7 @@ void		menu_loop(t_game *, t_menu *);
 void		state_button(t_game *, t_sprite *);
 void		trigger_button(t_game *, t_menu *);
 void		trigger_choose(t_game *, t_menu *);
+t_text		**init_text_menu(void);
 sfIntRect 	pixel_tall(int, int, int, int);
 t_game		*init_game(void);
 t_sprite	*create_sprite(char *, int, int, int);
@@ -70,6 +72,7 @@ t_sprite	**init_birds(int);
 void	analyse_event(t_game *, t_sprite **, t_sounds *, t_sprite **);
 int		play(void);
 t_sounds	*create_sounds(void);
+t_text		*create_text(char *);
 void		destroyer(t_sprite *, t_sprite **);
 void		draw_birds(sfRenderWindow *, t_sprite **, t_sprite **);
 int		draw_life(t_game *, t_sprite *, t_sprite **);

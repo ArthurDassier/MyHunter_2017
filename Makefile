@@ -18,6 +18,7 @@ NAME	=	my_hunter
 SRCS	=	srcs/main.c		\
 		srcs/menu.c		\
 		srcs/menu_buttons.c	\
+		srcs/menu_text.c	\
 		srcs/play.c		\
 		srcs/init.c		\
 		srcs/oaso.c		\
