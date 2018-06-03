@@ -33,7 +33,8 @@ int draw_life(t_game *game, t_sprite *heart, t_sprite **birds)
 	int	win = -1;
 
 	win = count_birds(birds, &passed);
-	if (passed <= 0) {
+	if (passed <= 0 || (game->state == 2 && birds[0]->pos.x > 1700)) {
+		game->level = 0;
 		game->state = 0;
 		return (0);
 	}

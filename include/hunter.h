@@ -72,7 +72,7 @@ t_sprite	*create_sprite(char *, int, int, int);
 sfIntRect	*bird_rect(void);
 void		window_display(sfRenderWindow *);
 t_sprite	**init_birds(int);
-void	analyse_event(t_game *, t_sprite **, t_sounds *, t_sprite **);
+void		analyse_event(t_game *, t_sprite **, t_sounds *, t_sprite **);
 int		play(void);
 t_sounds	*create_sounds(void);
 t_text		*create_text(char *, int, int);

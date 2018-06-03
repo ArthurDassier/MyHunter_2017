@@ -40,4 +40,5 @@ void reset(t_game *game, t_sounds *sounds)
 	game->score = 0;
 	game->level = 0;
 	game->boss_hit = 0;
+	sfText_setString(game->tx_sc->text, "Score : 0");
 }
