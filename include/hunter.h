@@ -59,6 +59,8 @@ typedef struct s_menu
 } 			t_menu;
 
 t_menu		*init_menu(void);
+void		set_position_text(t_menu *);
+void		draw_play(t_game *, t_menu *);
 void		menu_loop(t_game *, t_menu *);
 void		state_button(t_game *, t_sprite *);
 void		trigger_button(t_game *, t_menu *);

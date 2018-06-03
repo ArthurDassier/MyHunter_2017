@@ -75,6 +75,7 @@ int	play(void)
 	t_sounds	*sounds = create_sounds();
 	t_sprite	**cross = malloc(sizeof(t_sprite) * 2);
 
+	set_position_text(menu);
 	cross[0] = create_sprite("./textures/crossahir1.png", 0, 0, 0);
 	cross[1] = create_sprite("./textures/xplosion.png", 0, 0, 0);
 	cross[1]->clock = sfClock_create();
@@ -87,7 +88,6 @@ int	play(void)
 			window_open(game, cross, sounds);
 		sfRenderWindow_setMouseCursorVisible(game->window, sfTrue);
 	}
-	my_printf("Your final score is :\t%d\n", game->score);
 	destroy_game(game, menu, sounds, cross);
 	return (0);
 }

@@ -11,7 +11,7 @@
 #include "printf.h"
 #include "hunter.h"
 
-static void help()
+static void help(void)
 {
 	my_printf("Help\t:\nMouse click on the birds to earn points !\n");
 	my_printf("Then, you'll see your score on the screen.\n");

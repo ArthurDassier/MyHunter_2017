@@ -9,7 +9,7 @@
 #include "hunter.h"
 #include "printf.h"
 
-t_menu *init_menu()
+t_menu *init_menu(void)
 {
 	t_menu *new = malloc(sizeof(t_menu));
 
@@ -60,18 +60,6 @@ void choose_mode(t_game *game, t_menu *mn)
 	state_button(game, mn->button_normal);
 	state_button(game, mn->button_hell);
 	sfRenderWindow_drawSprite(game->window, mn->back->sp, NULL);
-	sfText_setPosition(mn->text_buttons[2]->text,
-		mn->text_buttons[2]->pos);
-	sfText_setPosition(mn->text_buttons[3]->text,
-		mn->text_buttons[3]->pos);
-	sfText_setPosition(mn->text_buttons[4]->text,
-		mn->text_buttons[4]->pos);
-	sfSprite_setPosition(mn->button_easy->sp,
-		mn->button_easy->pos);
-	sfSprite_setPosition(mn->button_hell->sp,
-		mn->button_hell->pos);
-	sfSprite_setPosition(mn->button_normal->sp,
-		mn->button_normal->pos);
 	sfRenderWindow_drawSprite(game->window,
 		mn->button_easy->sp, NULL);
 	sfRenderWindow_drawSprite(game->window,
@@ -85,28 +73,22 @@ void choose_mode(t_game *game, t_menu *mn)
 
 void menu_loop(t_game *game, t_menu *mn)
 {
+	if (game->score > 0) {
+		if (game->level >= 2)
+			sfText_setString(mn->text_buttons[5]->text,
+			my_strcat("You won ! Score : ", my_sti(game->score)));
+		else
+			sfText_setString(mn->text_buttons[5]->text,
+		my_strcat("You loose ... Score : ", my_sti(game->score)));
+	}
+	sfText_setPosition(mn->text_buttons[5]->text,
+						mn->text_buttons[5]->pos);
 	while (sfRenderWindow_isOpen(game->window) && game->state == 0) {
 		window_display(game->window);
 		event_menu(game, mn);
 		state_button(game, mn->button_play);
 		state_button(game, mn->button_quit);
-		sfRenderWindow_drawSprite(game->window, mn->back->sp, NULL);
-		sfText_setPosition(mn->text_buttons[0]->text,
-			mn->text_buttons[0]->pos);
-		sfText_setPosition(mn->text_buttons[1]->text,
-			mn->text_buttons[1]->pos);
-		sfSprite_setPosition(mn->button_play->sp,
-			mn->button_play->pos);
-		sfSprite_setPosition(mn->button_quit->sp,
-			mn->button_quit->pos);
-		sfRenderWindow_drawSprite(game->window,
-			mn->button_quit->sp, NULL);
-		sfRenderWindow_drawSprite(game->window,
-			mn->button_play->sp, NULL);
-		sfRenderWindow_drawText(game->window,
-			mn->text_buttons[0]->text, NULL);
-		sfRenderWindow_drawText(game->window,
-			mn->text_buttons[1]->text, NULL);
+		draw_play(game, mn);
 	}
 	while (sfRenderWindow_isOpen(game->window) && game->state == 1)
 		choose_mode(game, mn);
