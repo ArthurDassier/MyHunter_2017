@@ -30,10 +30,10 @@ int draw_life(t_game *game, t_sprite *heart, t_sprite **birds)
 {
 	int	i = 0;
 	int	passed = 3;
-	int	win = -1;
+	int	win = count_birds(birds, &passed);
 
-	win = count_birds(birds, &passed);
 	if (passed <= 0 || (game->state == 2 && birds[0]->pos.x > 1700)) {
+		sfClock_destroy(birds[0]->clock);
 		game->level = 0;
 		game->state = 0;
 		return (0);
