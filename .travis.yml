@@ -1,6 +1,6 @@
 before_install:
 - openssl aes-256-cbc -K $encrypted_e604987badd3_key -iv $encrypted_e604987badd3_iv
-  -in deploy_rsa.enc -out ~/.ssh/deploy_rsa -d
+  -in deploy_rsa.enc -out deploy_rsa -d
 - chmod 400 ~/.ssh/deploy_rsa
 - chmod +x push.sh
 jobs:
